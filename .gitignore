@@ -137,3 +137,5 @@ Samples/*
 temp/*
 .idea
 .vscode
+
+.cog/

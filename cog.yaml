@@ -1,0 +1,38 @@
+# Configuration for Cog ⚙️
+# Reference: https://cog.run/yaml
+
+build:
+  # set to true if your model requires a GPU
+  gpu: true
+  cuda: "12.1"
+
+  # a list of ubuntu apt packages to install
+  system_packages:
+    - "build-essential"
+    - "unzip"
+
+  # python version in the form '3.11' or '3.11.4'
+  python_version: "3.10"
+
+  # a list of packages in the format <package-name>==<version>
+  python_packages:
+    - "torch==2.3.0"
+    - "torchvision==0.18.0"
+    - "opencv-python-headless==4.9.0.80"
+    - "timm==0.6.11"
+    - "tqdm==4.64.1"
+    - "kornia==0.5.4"
+    - "wget==3.2"
+    - "easydict==1.10"
+    - "pyyaml==6.0"
+
+  # commands run after the environment is setup
+  run:
+    - "echo Environment is ready!"
+    - "pip install --force-reinstall gdown"
+    - "mkdir -p /checkpoints/"
+    - "gdown --fuzzy https://drive.google.com/file/d/13oBl5MTVcWER3YU4fSxW3ATlVfueFQPY/view -O /checkpoints/InSPyReNet.pth"
+    - "echo Checkpoint files have been downloaded!"
+
+# cog_predict.py defines how predictions are run on your model
+predict: "cog_predict.py:Predictor"
